@@ -5,7 +5,7 @@ const AppDashboard = () => {
     return (
         <Box sx={{ p: 3 }}>
             <Typography variant="h4" gutterBottom>
-                Welcome to Dashboard
+                Welcome to AWS Sync Dashboard
             </Typography>
             
             <Grid container spacing={3}>
