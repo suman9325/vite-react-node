@@ -1,0 +1,41 @@
+/* Backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent dark background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  /* Modal box */
+  .modal-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Modal actions */
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+  }
+  
+  .modal-actions button {
+    margin-left: 10px;
+  }
+  
+  .mt-12 {
+    margin-top: 12%;
+  }
+  .bg-red {
+    background-color: #f1ad9e;
+  }

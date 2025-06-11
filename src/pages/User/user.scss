@@ -1,0 +1,19 @@
+input::placeholder {
+    font-size: 12px;
+}
+
+textarea::placeholder {
+    font-size: 12px;
+}
+
+select.form-select {
+    font-size: 12px;
+}
+
+select.form-select option[value=""] {
+    font-size: 12px;
+}
+
+.f-s-12 {
+    font-size: 12px;
+}
