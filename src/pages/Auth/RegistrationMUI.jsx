@@ -25,6 +25,7 @@ const initialFormValues = {
     address: "",
     dob: "",
     country: "",
+    profilePicture: null, // For file upload
 };
 
 // Validation schema using Yup
@@ -54,7 +55,17 @@ export default function RegistrationMUI() {
         validationSchema, // Attach the Yup validation schema
         onSubmit: (values) => {
             values = { ...values, language: values.language.join(",") };
-            console.log("Form Values", values);
+            const formData = new FormData();
+            for (let key in values) {
+                formData.append(key, values[key]);
+            }
+            // console.log("Form Data", formData);
+            // console.log("Form Values", values);
+            console.log("Form Data (key-value pairs):");
+            for (let pair of formData.entries()) {
+                console.log(`${pair[0]}: ${pair[1]}`);
+            }
+
             setIsConfirmDialogOpen(true)
         },
     });
@@ -78,6 +89,12 @@ export default function RegistrationMUI() {
             : formikObj.values.language.filter((lang) => lang !== value);
         formikObj.setFieldValue("language", updatedLanguages);
     };
+
+    const getFile = (e) => {
+        const inputFile = e.target.files[0];
+        console.log(inputFile);
+        formikObj.setFieldValue("profilePicture", inputFile);
+    }
 
     return (
         <Fragment>
@@ -262,6 +279,24 @@ export default function RegistrationMUI() {
                                             <div className="text-danger">{formikObj.errors.country}</div>
                                         )}
                                     </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
+                                        <div className='row mt-3'>
+                                            <input type='file' className='form-control' onChange={getFile} />
+                                        </div>
+                                    </Col>
+                                    {/* <Col md={6}>
+                                        <div className='row mt-3'>
+                                            {selectedFile?.type?.startsWith("image/") && (
+                                                <img
+                                                    src={URL.createObjectURL(selectedFile)}
+                                                    alt="Preview"
+                                                    style={{ width: "200px", marginTop: "10px" }}
+                                                />
+                                            )}
+                                        </div>
+                                    </Col> */}
                                 </Row>
                             </Stack>
                         </CardBody>

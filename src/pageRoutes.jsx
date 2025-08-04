@@ -43,6 +43,12 @@ export const pageRoutes = [
         element: lazy(() => import('./pages/Dropdowns/AutocompleteBox')),
     },
     {
+        path: '/debounce-using-custom-hook',
+        label: 'DebounceUsingCustomHook',
+        icon: <SystemUpdateAltIcon/>,
+        element: lazy(() => import('./pages/Dropdowns/DebounceUsingCustomHook')),
+    },
+    {
         path: '/dependable-dropdown',
         label: 'Dependable Dropdown',
         icon: <SystemUpdateAltIcon/>,
@@ -113,6 +119,18 @@ export const pageRoutes = [
         label: 'BasicTable',
         icon: <TableViewIcon/>,
         element: lazy(() => import('./pages/List/BasicTable')),
+    },
+    {
+        path: '/sub-rows',
+        label: 'SubRows',
+        icon: <TableViewIcon/>,
+        element: lazy(() => import('./pages/List/SubRows')),
+    },
+    {
+        path: '/popover',
+        label: 'Pop-over',
+        icon: <TableViewIcon/>,
+        element: lazy(() => import('./pages/List/PopOver')),
     },
     {
         path: '/filter-table',

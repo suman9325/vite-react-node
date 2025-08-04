@@ -91,70 +91,19 @@ const List = () => {
     data: tableData, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
   });
 
-  const handleExport = async () => {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('User Data');
-
-    // Add Header Row
-    const headerRow = (Object.keys(dataSet?.[0])).map(col => col);
-    worksheet.addRow(headerRow);
-
-    // Add Data Rows
-    dataSet.forEach(row => {
-      worksheet.addRow((Object.values(row)).map(item => item));
-    });
-
-    // Style Header Row
-    worksheet.getRow(1).eachCell((cell) => {
-      cell.font = { bold: true };  // Bold text
-      cell.alignment = { vertical: 'middle', horizontal: 'center' };  // Center alignment
-      cell.fill = {  // Background Color
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFCCE5FF' },  // Light Blue
-      };
-      cell.border = {  // Border around header cell
-        top: { style: 'thin' },
-        left: { style: 'thin' },
-        bottom: { style: 'thin' },
-        right: { style: 'thin' },
-      };
-    });
-
-    // Auto Width for All Columns
-    worksheet.columns.forEach(column => {
-      let maxLength = 0;
-      column.eachCell({ includeEmpty: true }, cell => {
-        const columnLength = cell.value ? cell.value.toString().length : 10;
-        if (columnLength > maxLength) {
-          maxLength = columnLength;
-        }
-      });
-      column.width = maxLength < 10 ? 10 : maxLength + 2;
-    });
-
-    // Create and Download File
-    const buffer = await workbook.xlsx.writeBuffer();
-    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-    const fileExtension = '.xlsx';
-
-    const fileName = `User_${new Date().getFullYear()}${new Date().getMonth() + 1}${new Date().getDate()}`;
-
-    const data = new Blob([buffer], { type: fileType });
-    saveAs(data, fileName + fileExtension);
-  };
+  // to customize the excel sheet and download it
 
   // const handleExport = async () => {
   //   const workbook = new ExcelJS.Workbook();
   //   const worksheet = workbook.addWorksheet('User Data');
 
   //   // Add Header Row
-  //   const headerRow = columns.map(col => col.header);
+  //   const headerRow = (Object.keys(dataSet?.[0])).map(col => col);
   //   worksheet.addRow(headerRow);
 
   //   // Add Data Rows
-  //   tableData.forEach(row => {
-  //     worksheet.addRow(columns.map(col => row[col.accessorKey]));
+  //   dataSet.forEach(row => {
+  //     worksheet.addRow((Object.values(row)).map(item => item));
   //   });
 
   //   // Style Header Row
@@ -196,6 +145,18 @@ const List = () => {
   //   const data = new Blob([buffer], { type: fileType });
   //   saveAs(data, fileName + fileExtension);
   // };
+
+  // normal export function using xlsx library
+  
+  const handleExport = () => {
+    // Convert JSON data to worksheet
+    const worksheet = XLSX.utils.json_to_sheet(tableData);
+
+    // Create a new workbook and append the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "User Data");
+    XLSX.writeFile(workbook, `User_${new Date().getFullYear()}${new Date().getMonth() + 1}${new Date().getDate()}.xlsx`);
+  };
 
 
   return (

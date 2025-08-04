@@ -61,7 +61,7 @@ const FileDownloadEx = () => {
     }
 
     const downloadViewFile = (fileData) => {
-        console.log(`${import.meta.env.VITE_FILE_BASE_URL}/${fileData?.fullPath}`)
+        // console.log(`${import.meta.env.VITE_FILE_BASE_URL}/${fileData?.fullPath}`)
         switch (fileData?.type) {
             case "image/jpeg":
             case "application/pdf":

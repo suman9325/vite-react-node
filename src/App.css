@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -43,34 +46,45 @@
 
 /* Highlight the table header */
 th {
-  background-color: #4ebaec; /* Darker gray color for header */
-  padding: 10px; /* Add padding to header cells */
-  text-align: left; /* Align text to the left */
+  background-color: #4ebaec;
+  /* Darker gray color for header */
+  padding: 10px;
+  /* Add padding to header cells */
+  text-align: left;
+  /* Align text to the left */
 }
 
 /* Stripe color for alternating rows */
 tr:nth-child(odd) {
-  background-color: #e6e6e6; /* Slightly darker striped color for odd rows */
+  background-color: #e6e6e6;
+  /* Slightly darker striped color for odd rows */
 }
 
 tr:nth-child(even) {
-  background-color: #f5f5f5; /* Slightly darker white color for even rows */
+  background-color: #f5f5f5;
+  /* Slightly darker white color for even rows */
 }
 
 /* Optional: Add hover effect for table rows */
 tr:hover {
-  background-color: #cccccc; /* Darker gray color on row hover */
+  background-color: #cccccc;
+  /* Darker gray color on row hover */
 }
 
 /* Optional: Add borders to table */
 table {
-  border-collapse: collapse; /* Ensures borders do not collapse into each other */
-  width: 100%; /* Make table take full width */
+  border-collapse: collapse;
+  /* Ensures borders do not collapse into each other */
+  width: 100%;
+  /* Make table take full width */
 }
 
-th, td {
-  border: 1px solid #bbb; /* Darker border color */
-  padding: 10px; /* Padding for better readability */
+th,
+td {
+  border: 1px solid #bbb;
+  /* Darker border color */
+  padding: 10px;
+  /* Padding for better readability */
 }
 
 /* Layout Container */
@@ -83,7 +97,8 @@ th, td {
 
 /* Sidebar */
 .sidebar {
-  width: 260px; /* Adjust according to your sidebar */
+  width: 260px;
+  /* Adjust according to your sidebar */
   flex-shrink: 0;
 }
 
@@ -98,7 +113,8 @@ th, td {
 
 /* Navbar */
 .navbar {
-  height: 64px; /* Adjust as per your AppBar height */
+  height: 64px;
+  /* Adjust as per your AppBar height */
   width: 100%;
   background-color: #1E293B;
   display: flex;
@@ -112,5 +128,28 @@ th, td {
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
-  background-color: #f5f5f5; /* Light background */
+  background-color: #f5f5f5;
+  /* Light background */
+}
+
+.badge-success {
+  font-size: 15px;
+  color: #465E37;
+  border: 2px solid;
+  border-radius: 5px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  background-color: #E6EDE1;
+}
+
+.badge-danger {
+  font-size: 15px;
+  color: #D16A5A;
+  border: 2px solid;
+  border-radius: 5px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  background-color: #EDE2E1;
 }

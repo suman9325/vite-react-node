@@ -3,44 +3,59 @@ import * as XLSX from "xlsx";
 
 const ExcelViewUpload = () => {
     const [data, setData] = useState([]);
-    const [fileName, setFileName]= useState('');
+    const [fileName, setFileName] = useState('');
     const [payloadData, setPayloadData] = useState([]);
     const colHeads = ['date', 'name', 'title'];
 
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
-        setFileName(file.fileName);
         if (file) {
+            setFileName(file.name);
             const reader = new FileReader();
             reader.readAsBinaryString(file);
             reader.onload = (e) => {
-                console.log(e.target.result)
                 const workbook = XLSX.read(e.target.result, { type: "binary" });
                 const sheetName = workbook.SheetNames[0];
                 const sheet = workbook.Sheets[sheetName];
-                const parsedData = XLSX.utils.sheet_to_json(sheet);
-                console.log(parsedData);
+
+                const parsedData = XLSX.utils.sheet_to_json(sheet); // raw=true gives Excel serial numbers
+
+                parsedData.forEach((item) => {
+                    for (let key in item) {
+                        const val = item[key];
+                        if (typeof val === "number" && key.toLowerCase().includes("date")) {
+                            const dateObj = XLSX.SSF.parse_date_code(val);
+                            if (dateObj) {
+                                const jsDate = new Date(Date.UTC(dateObj.y, dateObj.m - 1, dateObj.d));
+                                item[key] = jsDate.toISOString().split("T")[0]; // "YYYY-MM-DD"
+                            }
+                        }
+                    }
+                });
 
                 setData(parsedData);
             };
         }
     };
 
+
+
+
     const handleSubmit = async () => {
         data.map((item) => {
             const arr = Object.values(item);  // Extract values from item
             let obj = {};  // Initialize an empty object
-        
+
             for (let i = 0; i < colHeads.length; i++) {
                 obj[colHeads[i]] = arr[i];  // Map column headers to values
             }
-        
+
             payloadData.push(obj);  // Push a copy of the object
         });
         console.log(payloadData);
     };
 
-    const handleClear=()=>{
+    const handleClear = () => {
         setPayloadData([]);
         setData([]);
         setFileName('');
@@ -52,7 +67,7 @@ const ExcelViewUpload = () => {
                 <h3>Excel File Upload</h3>
             </div>
             <div className="d-flex mb-2">
-                <input type="file" accept=".xlsx, .xls" value={fileName} onChange={handleFileUpload} />
+                <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
             </div>
             {data.length > 0 && (
                 <>

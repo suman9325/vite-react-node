@@ -1,5 +1,7 @@
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-bootstrap";
 import React from 'react';
+import './accordionStyles.scss'; // Adjust path as needed
+
 
 function AccordionPage() {
 
@@ -80,6 +82,22 @@ function AccordionPage() {
                             ))
                             }
                         </ul>
+                        <Accordion>
+                            {teamData?.map((team, index) => (
+                                <AccordionItem eventKey={index.toString()}>
+                                    <AccordionHeader>{team?.teamName}</AccordionHeader>
+                                    <AccordionBody>
+                                        <ul className="text-start">
+                                            {((playersData?.filter(players => players.teamId === team?.teamId))?.[0]?.players)?.map((p, index) => (
+                                                <li key={index}>{p?.playerName}</li>
+                                            ))
+                                            }
+                                        </ul>
+                                    </AccordionBody>
+                                </AccordionItem>
+                            ))
+                            }
+                        </Accordion>
                     </AccordionBody>
                 </AccordionItem>
             ))

@@ -88,6 +88,16 @@ const Switch = () => {
                     </div>
                 ),
             },
+            {
+                accessorKey: "id",
+                header: "Status",
+                size: 200,
+                Cell: ({cell, row}) => (
+                    <div className={row.original.isActive==true ? 'badge-success' : 'badge-danger'}>
+                        <span>{row.original.isActive==true ? 'Active' : 'Inactive'}</span>
+                    </div>
+                )
+            }
         ],
         []);
 

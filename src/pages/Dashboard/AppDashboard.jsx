@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Card, CardContent, Typography, Grid } from '@mui/material';
+import { axiosInstance } from '../../api/axiosInstance';
 
 const AppDashboard = () => {
+    useEffect(() => {
+        // This is where you can fetch data or perform any setup when the component mounts
+        axiosInstance.post('http://35.170.201.215:5000/api/getUser')
+            .then(response => {
+                console.log('Dashboard initialized:', response.data);
+            })
+            .catch(error => {
+                console.error('Error initializing dashboard:', error);
+            });
+    }, []);
     return (
         <Box sx={{ p: 3 }}>
             <Typography variant="h4" gutterBottom>

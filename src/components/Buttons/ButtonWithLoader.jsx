@@ -7,7 +7,7 @@ export default function ButtonWithLoader({ children, style, onBtnClick, isLoadin
     };
     return (
         <>
-            <button onClick={handleClick} className={style} disabled={isLoading}>
+            <button onClick={handleClick} className={style} disabled={isLoading} type='button'>
                 {
                     isLoading ? <span className="spinner-border spinner-border-sm" aria-hidden="true"></span> :
                         children
